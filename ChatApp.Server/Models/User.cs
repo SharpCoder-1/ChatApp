@@ -1,6 +1,14 @@
-﻿namespace ChatApp.Server.Models
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+
+namespace ChatApp.Server.Models
 {
-    public class User
+    public class User:IdentityUser
     {
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
     }
 }

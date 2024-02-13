@@ -27,7 +27,7 @@ namespace ChatApp.Server.Controllers
             _userManager = userManager;
         }
         [HttpGet("Users")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers(){
+        public ActionResult<IEnumerable<User>> GetUsers(){
             return Ok(_userManager.Users);
         }
 
@@ -41,7 +41,7 @@ namespace ChatApp.Server.Controllers
 
         [HttpPost("Login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto model)
-        {
+        { 
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user is null)
                 return Unauthorized("Invalid username or password");
@@ -52,9 +52,9 @@ namespace ChatApp.Server.Controllers
             if (!result.Succeeded)
                 return Unauthorized("Invalid username or password");
 
+
+
             return CreateApplicationUserDto(user);
-
-
 
         }
         [HttpPost("Register")]
@@ -75,7 +75,8 @@ namespace ChatApp.Server.Controllers
             var result = await _userManager.CreateAsync(userToAdd, model.Password);
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
-            return Ok("Your account has been created");
+            return Ok(new JsonResult(
+                new { title = "Account Created",message = "Your account has been created,you can login" })); 
         
         }
         #region Private

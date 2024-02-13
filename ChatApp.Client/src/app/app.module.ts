@@ -7,19 +7,24 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-
+import { SharedModule } from './shared/shared.module';
+import { PlayComponent } from './play/play.component';
+import {HTTP_INTERCEPTORS,provideHttpClient,withInterceptors} from '@angular/common/http';
+import { jwtInterceptor } from './shared/interceptors/jwt.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    HomeComponent],
+    HomeComponent,
+    PlayComponent],
   imports: [
     BrowserModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [provideHttpClient(withInterceptors([jwtInterceptor]))],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

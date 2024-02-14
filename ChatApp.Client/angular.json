@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/chat-app.client",
+            "outputPath": "dist/ChatApp.Client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -37,16 +37,19 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "4mb"
                 },
                 {
                    "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
+                  "maximumWarning": "2mb",
+                  "maximumError": "4mb"
+                },
+
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": false,
+
             },
             "development": {
               "buildOptimizer": false,
@@ -102,6 +105,9 @@
             "scripts": [],
             "karmaConfig": "karma.conf.js"
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }

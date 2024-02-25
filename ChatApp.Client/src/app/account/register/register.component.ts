@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Router } from '@angular/router';
+import { User} from 'src/app/shared/models/user';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -45,6 +46,12 @@ export class RegisterComponent implements OnInit {
     
   }
   ngOnInit(): void {
+    this.accountService.user$.subscribe({
+      next: (user: User | null) => {
+        if (user)
+          this.router.navigateByUrl("/");
+      }
+    })
     this.initializeForm();
   }
   initializeForm(){

@@ -19,6 +19,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<JWTService>();
+builder.Services.AddScoped<EmailService>();
+
 
 builder.Services.AddCors();
 builder.Services.Configure<ApiBehaviorOptions>(options =>

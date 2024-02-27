@@ -4,7 +4,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Router } from '@angular/router';
-import { User} from 'src/app/shared/models/user';
+import { User } from 'src/app/shared/models/account/user';
+import { ConfirmEmail } from 'src/app/shared/models/account/confirmEmail';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

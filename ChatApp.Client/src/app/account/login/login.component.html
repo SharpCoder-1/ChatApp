@@ -24,12 +24,18 @@
                     </span>
                 </div>
 
+
                 <div class="d-grid mt-4 px-1">
                     <button class="btn btn-lg btn-info" type="submit">Log in</button>
                 </div>
             </form>
             <div class="form-floating" *ngIf="errorMessages.length>0">
                 <app-validation-messages [errorMessages]="errorMessages"/>
+                <a class="btn btn-link" (click)="resendEmailConfirmationLink()"
+                   *ngIf="errorMessages.includes('Please confirm your email')">
+                   Click here to resend email confirmation link again.
+
+                </a>
 
             </div>
             <div class="mt-4 text-center">

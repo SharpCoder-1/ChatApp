@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AccountService } from 'src/app/account/account.service';
 import { SharedService } from '../shared.service';
 import {map} from 'rxjs';
-import { User } from '../models/user';
+import { User } from '../models/account/user';
 export const authorizationGuard: CanActivateFn = (route, state) => {
   const authService = inject(AccountService);
   const router = inject(Router);

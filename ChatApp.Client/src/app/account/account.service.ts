@@ -1,12 +1,12 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Register} from 'src/app/shared/models/register';
-import { Login } from '../shared/models/login';
+import {Register} from 'src/app/shared/models/account/register';
+import { Login } from '../shared/models/account/login';
 import { environment } from 'src/environments/environment.development';
-import { User } from '../shared/models/user';
+import { User } from '../shared/models/account/user';
 import {ReplaySubject,map,of} from 'rxjs'
 import { Router } from '@angular/router';
-
+import { ConfirmEmail } from 'src/app/shared/models/account/confirmEmail';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +27,10 @@ export class AccountService {
       if(user)
         this.setUser(user);
     }));
+  }
+
+  confirmEmail(model: ConfirmEmail) {
+    return this.http.put(`${environment.appUrl}/api/account/confirm-email`, model);
   }
 
 
@@ -59,6 +63,11 @@ export class AccountService {
     localStorage.removeItem(environment.key);
     this.userSource.next(null);
     this.router.navigateByUrl('/');
+  }
+
+  resendEmailConfirmationLink(email: string) {
+    console.log(email);
+    return this.http.post(`${environment.appUrl}/api/account/resend-email-confirmation-link`, { email })
   }
 
   private setUser(user:User){

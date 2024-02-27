@@ -149,8 +149,8 @@ namespace ChatApp.Server.Controllers
             }
         }
 
-        [HttpPost("resend-email-confirmation-link/{email}")]
-        public async Task<IActionResult> ResendEmailConfirmationLink(string email)
+        [HttpPost("resend-email-confirmation-link/")]
+        public async Task<IActionResult> ResendEmailConfirmationLink([FromQuery]string email)
         {
             if (string.IsNullOrWhiteSpace(email)) return BadRequest("Invalid email");
             var user = await _userManager.FindByEmailAsync(email);

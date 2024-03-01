@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@angular/cli": "^17.1.2",
-    "@angular/core": "^17.1.2",
+    "@angular/cli": "^17.2.2",
+    "@angular/core": "^17.2.3",
     "@angular/platform-browser-dynamic": "^17.1.2",
     "bootstrap": "^5.3.2",
     "bootswatch": "^5.3.2",
@@ -23,7 +23,7 @@
     "angular-cli-ghpages": "^2.0.0-beta.2",
     "tailwindcss": "^3.4.1",
     "tslib": "^2.6.2",
- "webpack": "~5.80.0",
+    "webpack": "~5.80.0",
     "webpack-cli": "5.0.0",
     "webpack-dev-server": "~4.13.0"
   }

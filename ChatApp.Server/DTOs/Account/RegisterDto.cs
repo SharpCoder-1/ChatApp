@@ -2,7 +2,7 @@
 
 namespace ChatApp.Server.DTOs.Account
 {
-    public class RegisterDto
+    public record RegisterDto
     {
         [Required]
         [StringLength(15,MinimumLength =3, ErrorMessage = "First name must be at least {2},and maximum {1} characters")]

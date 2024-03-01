@@ -132,6 +132,7 @@ namespace ChatApp.Server.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null) return BadRequest("Invalid email");
             if (!user.EmailConfirmed) return BadRequest("Please confirm your email address");
+            if (await _userManager.CheckPasswordAsync(user, model.NewPassword)) return BadRequest("The new password should be unique from old password");
             try
             {
                 var decodedTokenBytes = WebEncoders.Base64UrlDecode(model.Token);
@@ -149,9 +150,10 @@ namespace ChatApp.Server.Controllers
             }
         }
 
-        [HttpPost("resend-email-confirmation-link/")]
-        public async Task<IActionResult> ResendEmailConfirmationLink([FromQuery]string email)
+        [HttpPost("resend-email-confirmation-link/{email}")]
+        public async Task<IActionResult> ResendEmailConfirmationLink(string email)
         {
+            Console.WriteLine(HttpContext.Request.Body);
             if (string.IsNullOrWhiteSpace(email)) return BadRequest("Invalid email");
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null) return Unauthorized("This user has not been registered yet");

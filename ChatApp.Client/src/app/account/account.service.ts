@@ -7,10 +7,16 @@ import { User } from '../shared/models/account/user';
 import {ReplaySubject,map,of} from 'rxjs'
 import { Router } from '@angular/router';
 import { ConfirmEmail } from 'src/app/shared/models/account/confirmEmail';
+import { ResetPassword } from '../shared/models/account/ResetPassword';
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
+  
+  forgotUsernameOrPassword(email: string) {
+    return this.http.post(`${environment.appUrl}/api/account/forgot-username-or-password/${email}`, {});
+    
+  }
   private userSource = new ReplaySubject<User | null>(1);
   user$ = this.userSource.asObservable();
   constructor(private http:HttpClient,private router:Router) {
@@ -67,7 +73,12 @@ export class AccountService {
 
   resendEmailConfirmationLink(email: string) {
     console.log(email);
-    return this.http.post(`${environment.appUrl}/api/account/resend-email-confirmation-link`, { email })
+    
+    return this.http.post(`${environment.appUrl}/api/account/resend-email-confirmation-link/${email}`, {})
+  }
+
+  resetPassword(model: ResetPassword) {
+    return this.http.put(`${environment.appUrl}/api/account/reset-password`,model);
   }
 
   private setUser(user:User){

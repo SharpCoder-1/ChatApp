@@ -6,11 +6,13 @@ import { AccountRoutingModule } from './account-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms'
 import { SendEmailComponent } from './send-email/send-email.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    SendEmailComponent
+    SendEmailComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

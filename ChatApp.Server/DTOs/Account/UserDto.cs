@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 namespace ChatApp.Server.DTOs.Account
 {
-    public class UserDto
+    public record UserDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

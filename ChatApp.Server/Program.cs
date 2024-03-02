@@ -9,6 +9,8 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
+using ChatApp.Server.Repositories.Contracts;
+using ChatApp.Server.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,6 +22,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<JWTService>();
 builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 
 
 builder.Services.AddCors();

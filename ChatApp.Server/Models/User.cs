@@ -10,5 +10,9 @@ namespace ChatApp.Server.Models
         [Required]
         public string LastName { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+
+        public ICollection<Message> SentMessages { get; set; } = new List<Message>();
+        public ICollection<Message> ReceivedMessages { get; set; } = new List<Message>();
+
     }
 }

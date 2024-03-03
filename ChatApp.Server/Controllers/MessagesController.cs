@@ -9,6 +9,8 @@ using ChatApp.Server.Data;
 using ChatApp.Server.Models;
 using ChatApp.Server.Repositories.Contracts;
 using ChatApp.Server.DTOs.Messages;
+using Microsoft.AspNetCore.SignalR;
+using ChatApp.Server.Hubs;
 
 namespace ChatApp.Server.Controllers
 {
@@ -22,6 +24,7 @@ namespace ChatApp.Server.Controllers
         {
             _messageRepos = messageRepos;
         }
+
 
         // GET: api/Messages
         [HttpGet]

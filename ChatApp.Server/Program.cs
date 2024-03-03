@@ -11,6 +11,8 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using ChatApp.Server.Repositories.Contracts;
 using ChatApp.Server.Repositories;
+using ChatApp.Server.Hubs;
+using ChatApp.Server.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -23,7 +25,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<JWTService>();
 builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddTransient<ChatMiddleware>();
 
+
+builder.Services.AddSignalR();
 
 builder.Services.AddCors();
 builder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -99,6 +104,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
+
+
+app.UseMiddleware<ChatMiddleware>();
+
 app.UseCors(options =>
 {
     options.AllowAnyHeader()
@@ -120,5 +129,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<ChatHub>("hubs/chat");
 
 app.Run();

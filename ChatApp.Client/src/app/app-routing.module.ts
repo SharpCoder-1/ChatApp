@@ -10,7 +10,8 @@ const routes:Routes =[
   {path: '' ,component:HomeComponent},
   {path: 'not-found' , component:NotFoundComponent},
   {path:'play',component:PlayComponent,canActivate:[authorizationGuard]},
-  {path: 'account', loadChildren:()=>import('./account/account.module').then(module=>module.AccountModule)},
+  { path:'account', loadChildren: () => import('./account/account.module').then(module => module.AccountModule) },
+  {path:'chat',loadChildren:()=>import('./chat/chat.module').then(module=>module.ChatModule)},
   {path: '**',component:NotFoundComponent,pathMatch: 'full'}
 ];
 

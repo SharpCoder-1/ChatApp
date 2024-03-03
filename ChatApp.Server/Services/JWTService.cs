@@ -17,6 +17,11 @@ namespace ChatApp.Server.Services
             _jwtKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_config["JWT:Key"]));
         }
+        public string GetClaim(string token,string claimType)
+        {
+            var tokenHandler = new JwtSecurityToken(token);
+            return tokenHandler.Claims.FirstOrDefault(p => p.Type == claimType).Value;
+        }
         public string CreateJWT(User user)
         {
             var claims = new List<Claim>()

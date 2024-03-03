@@ -44,6 +44,10 @@ namespace ChatApp.Server.Repositories
         {
             return _context.Messages;
         }
+        public IEnumerable<Message> GetMessages(string userId)
+        {
+            return _context.Messages.Where(m=>m.SenderId==userId);
+        }
 
         public async Task<Message> UpdateMessage(int id,UpdateMessageDto messageDto)
         {

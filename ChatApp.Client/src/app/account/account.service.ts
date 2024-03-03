@@ -7,21 +7,24 @@ import { User } from '../shared/models/account/user';
 import {ReplaySubject,map,of} from 'rxjs'
 import { Router } from '@angular/router';
 import { ConfirmEmail } from 'src/app/shared/models/account/confirmEmail';
-import { ResetPassword } from '../shared/models/account/ResetPassword';
+import { ResetPassword } from '../shared/models/account/resetPassword';
+import { SharedService } from '../shared/shared.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  
+  constructor(private http: HttpClient, private router: Router,
+              private sharedService:SharedService
+  ) {
+
+   }
   forgotUsernameOrPassword(email: string) {
     return this.http.post(`${environment.appUrl}/api/account/forgot-username-or-password/${email}`, {});
     
   }
   private userSource = new ReplaySubject<User | null>(1);
   user$ = this.userSource.asObservable();
-  constructor(private http:HttpClient,private router:Router) {
 
-   }
   register(model:Register){
     return this.http.post(`${environment.appUrl}/api/account/register`,model);
   }
@@ -41,7 +44,7 @@ export class AccountService {
 
 
   refreshUser(){ 
-    const jwt:string | null = this.getJwt();
+    const jwt:string | null = this.sharedService.getJwt();
     console.log(`JWT ${jwt}`)
     if(!jwt){
       this.userSource.next(null);
@@ -56,15 +59,7 @@ export class AccountService {
         this.setUser(user);
     }));
   }
-  getJwt(){
-    
-    const key = localStorage.getItem(environment.key);
-    if(key){
-      const user:User = JSON.parse(key) as User;
-      return user.JWT;
-    }
-    return null;
-  }
+  
   logout(){
     localStorage.removeItem(environment.key);
     this.userSource.next(null);

@@ -1,0 +1,15 @@
+<button (click)="sendMessage()">Click</button>
+
+
+<span *ngIf="messages">
+    <ul>
+        <li *ngFor="let message of messages|async">
+            <span class="">
+                {{message.body}}
+            </span>
+        </li>
+    </ul>
+</span>
+
+    <span>There are no messages</span>
+
